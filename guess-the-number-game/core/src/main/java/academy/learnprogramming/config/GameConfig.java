@@ -1,4 +1,4 @@
-package academy.config;
+package academy.learnprogramming.config;
 
 import academy.learnprogramming.GuessCount;
 import academy.learnprogramming.MaxNumber;
@@ -14,14 +14,15 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:config/game.properties")
 public class GameConfig {
 
-    @Value("${game.maxNumber}")
+    @Value("${game.maxNumber:20}")
     private int maxNumber;
 
-    @Value("${game.minNumber}")
+    @Value("${game.guessCount:5}")
+    private int guessCount;
+
+    @Value("${game.minNumber:5}")
     private int minNumber;
 
-    @Value("${game.guessCount}")
-    private int guessCount;
 
     @Bean
     @MaxNumber
@@ -30,14 +31,14 @@ public class GameConfig {
     }
 
     @Bean
-    @MinNumber
-    public int minNumber() {
-        return minNumber;
-    }
-
-    @Bean
     @GuessCount
     public int guessCount() {
         return guessCount;
+    }
+
+    @Bean
+    @MinNumber
+    public int minNumber() {
+        return minNumber;
     }
 }
